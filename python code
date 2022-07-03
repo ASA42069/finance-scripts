@@ -1,0 +1,26 @@
+import pandas_datareader as pdr # access fred
+import pandas as pd
+import requests # data from api
+import plotly.express as px # visualize
+from datetime import datetime
+
+# extract api key
+apikey = '' # enter your API KEY here
+
+#function to retrieve the data and reset the index (this gives us the DATE field as a column).
+def get_fred_data(param_list, start_date, end_date):
+  df = pdr.DataReader(param_list, 'fred', start_date, end_date)
+  return df.reset_index()
+  
+series = 'MORTGAGE30US' # in this case I have selected the 30 year mortgage rate of the united states
+
+# get data for series
+df = get_fred_data(param_list=[series],start_date='2010',end_date='2022-07-02') 
+
+# adjust the date depending on the series. 
+# some are annual, some are monthly etc. 
+# type 'df' to get the output
+
+# plot
+fig = px.line(df, x="DATE", y=series, title=series)
+fig.show()
