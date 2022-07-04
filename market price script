@@ -1,0 +1,15 @@
+# another code - easier
+import yfinance as yf
+
+tickers = ['CVNA','TQQQ','STNE','TSLA','MELI','DDS']
+for i in range(len(tickers)):
+    ticker = tickers[i]
+    stock_info = yf.Ticker(ticker).info
+    # stock_info.keys() for other properties you can explore
+    market_price = stock_info['regularMarketPrice']
+    previous_close_price = stock_info['regularMarketPreviousClose']
+    print('prices for:',ticker)
+    print('market price ', market_price)
+    print('previous close price ', previous_close_price)
+    print('')
+    i=i+1
